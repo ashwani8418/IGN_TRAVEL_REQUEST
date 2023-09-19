@@ -140,6 +140,11 @@ annotate service.Travel with @(
                 Label : 'HotelAccomdation_Code',
                 Value : HotelAccomdation_Code,
             },
+            {
+                $Type : 'UI.DataField',
+                Label : 'TravelStatus',
+                Value : Travelstatus_Code,
+            },
         ],
     },
     UI.Facets : [
