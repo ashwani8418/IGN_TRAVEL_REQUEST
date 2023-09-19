@@ -1,0 +1,6 @@
+PATCH http://localhost:4004/odata/v4/travel-request/Travel/10
+Content-Type: application/json
+
+{
+    "EmpName_EmpId" :"annu"
+}

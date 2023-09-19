@@ -1,0 +1,24 @@
+POST   http://localhost:4004/odata/v4/travel-request/Travel
+Content-Type: application/json
+
+{
+    "TravelId": "22",
+      "EmpId_EmpId": "101",
+      "EmpName_EmpId": "Shruti",
+      "TravelType_Code": "N",
+      "TravelMode_Code": "F",
+      "TripType_Code": "TW",
+      "NoOfPassenger": 2,
+      "Origin": "Delhi",
+      "Destination": "Mumbai",
+      "DateOfDeparture": "2023-06-18",
+      "DateOfArrival": "2023-06-19",
+      "DateOfReturn": "2023-06-21",
+      "Description": "I am Going To Mumbai",
+      "NoOfDays": 3,
+      "Billable_Code": "Y",
+      "HotelAccomdation_Code": "Y",
+      "Travelstatus_Code": "O"
+}
+
+
