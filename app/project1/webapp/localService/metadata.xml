@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
+        <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="TravelRequestService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Travel" EntityType="TravelRequestService.Travel">
+                    <NavigationPropertyBinding Path="EmpId" Target="Employee"/>
+                    <NavigationPropertyBinding Path="EmpName" Target="Employee"/>
+                    <NavigationPropertyBinding Path="TravelType" Target="TravelType"/>
+                    <NavigationPropertyBinding Path="TravelMode" Target="TravelMode"/>
+                    <NavigationPropertyBinding Path="TripType" Target="TripType"/>
+                    <NavigationPropertyBinding Path="Billable" Target="Billable"/>
+                    <NavigationPropertyBinding Path="HotelAccomdation" Target="HotelAccomdation"/>
+                </EntitySet>
+                <EntitySet Name="Employee" EntityType="TravelRequestService.Employee">
+                    <NavigationPropertyBinding Path="EmpStatus" Target="EmpStatus"/>
+                </EntitySet>
+                <EntitySet Name="EmpStatus" EntityType="TravelRequestService.EmpStatus"/>
+                <EntitySet Name="TravelType" EntityType="TravelRequestService.TravelType"/>
+                <EntitySet Name="TravelMode" EntityType="TravelRequestService.TravelMode"/>
+                <EntitySet Name="TripType" EntityType="TravelRequestService.TripType"/>
+                <EntitySet Name="Billable" EntityType="TravelRequestService.Billable"/>
+                <EntitySet Name="HotelAccomdation" EntityType="TravelRequestService.HotelAccomdation"/>
+            </EntityContainer>
+            <EntityType Name="Travel">
+                <Property Name="TravelId" Type="Edm.String" MaxLength="15"/>
+                <NavigationProperty Name="EmpId" Type="TravelRequestService.Employee">
+                    <ReferentialConstraint Property="EmpId_EmpId" ReferencedProperty="EmpId"/>
+                </NavigationProperty>
+                <Property Name="EmpId_EmpId" Type="Edm.String" MaxLength="15"/>
+                <NavigationProperty Name="EmpName" Type="TravelRequestService.Employee">
+                    <ReferentialConstraint Property="EmpName_EmpId" ReferencedProperty="EmpId"/>
+                </NavigationProperty>
+                <Property Name="EmpName_EmpId" Type="Edm.String" MaxLength="15"/>
+                <NavigationProperty Name="TravelType" Type="TravelRequestService.TravelType">
+                    <ReferentialConstraint Property="TravelType_Code" ReferencedProperty="Code"/>
+                </NavigationProperty>
+                <Property Name="TravelType_Code" Type="Edm.String"/>
+                <NavigationProperty Name="TravelMode" Type="TravelRequestService.TravelMode">
+                    <ReferentialConstraint Property="TravelMode_Code" ReferencedProperty="Code"/>
+                </NavigationProperty>
+                <Property Name="TravelMode_Code" Type="Edm.String"/>
+                <NavigationProperty Name="TripType" Type="TravelRequestService.TripType">
+                    <ReferentialConstraint Property="TripType_Code" ReferencedProperty="Code"/>
+                </NavigationProperty>
+                <Property Name="TripType_Code" Type="Edm.String"/>
+                <Property Name="NoOfPassenger" Type="Edm.Int32"/>
+                <Property Name="Origin" Type="Edm.String" MaxLength="30"/>
+                <Property Name="Destination" Type="Edm.String" MaxLength="30"/>
+                <Property Name="DateOfDeparture" Type="Edm.Date"/>
+                <Property Name="DateOfArrival" Type="Edm.Date"/>
+                <Property Name="DateOfReturn" Type="Edm.Date"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="40"/>
+                <Property Name="NoOfDays" Type="Edm.Int32"/>
+                <NavigationProperty Name="Billable" Type="TravelRequestService.Billable">
+                    <ReferentialConstraint Property="Billable_Code" ReferencedProperty="Code"/>
+                </NavigationProperty>
+                <Property Name="Billable_Code" Type="Edm.String"/>
+                <NavigationProperty Name="HotelAccomdation" Type="TravelRequestService.HotelAccomdation">
+                    <ReferentialConstraint Property="HotelAccomdation_Code" ReferencedProperty="Code"/>
+                </NavigationProperty>
+                <Property Name="HotelAccomdation_Code" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Employee">
+                <Key>
+                    <PropertyRef Name="EmpId"/>
+                </Key>
+                <Property Name="EmpId" Type="Edm.String" MaxLength="15" Nullable="false"/>
+                <Property Name="FirstName" Type="Edm.String" MaxLength="15"/>
+                <Property Name="MiddleName" Type="Edm.String" MaxLength="15"/>
+                <Property Name="LastName" Type="Edm.String" MaxLength="15"/>
+                <Property Name="EmailAddress" Type="Edm.String" MaxLength="30"/>
+                <Property Name="Department" Type="Edm.String" MaxLength="20"/>
+                <Property Name="Designation" Type="Edm.String" MaxLength="20"/>
+                <Property Name="DOB" Type="Edm.Date"/>
+                <Property Name="PhoneNo" Type="Edm.Int32"/>
+                <Property Name="DOJ" Type="Edm.Date"/>
+                <NavigationProperty Name="EmpStatus" Type="TravelRequestService.EmpStatus">
+                    <ReferentialConstraint Property="EmpStatus_Code" ReferencedProperty="Code"/>
+                </NavigationProperty>
+                <Property Name="EmpStatus_Code" Type="Edm.String"/>
+                <Property Name="BaseLocation" Type="Edm.String" MaxLength="30"/>
+            </EntityType>
+            <EntityType Name="EmpStatus">
+                <Key>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="Code" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="TravelType">
+                <Key>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="Code" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="TravelMode">
+                <Key>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="Code" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="TripType">
+                <Key>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="Code" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="Billable">
+                <Key>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="Code" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="HotelAccomdation">
+                <Key>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="Code" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <Annotations Target="TravelRequestService.EmpStatus/Code">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Active"/>
+                            <PropertyValue Property="Value" String="A"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="NonActive"/>
+                            <PropertyValue Property="Value" String="N"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="TravelRequestService.TravelType/Code">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="National"/>
+                            <PropertyValue Property="Value" String="N"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="International"/>
+                            <PropertyValue Property="Value" String="I"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="TravelRequestService.TravelMode/Code">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Flight"/>
+                            <PropertyValue Property="Value" String="F"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Train"/>
+                            <PropertyValue Property="Value" String="T"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Car"/>
+                            <PropertyValue Property="Value" String="C"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Others"/>
+                            <PropertyValue Property="Value" String="O"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="TravelRequestService.TripType/Code">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="OneWay"/>
+                            <PropertyValue Property="Value" String="OW"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="TwoWay"/>
+                            <PropertyValue Property="Value" String="TW"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="TravelRequestService.Billable/Code">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Yes"/>
+                            <PropertyValue Property="Value" String="Y"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="No"/>
+                            <PropertyValue Property="Value" String="N"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="TravelRequestService.HotelAccomdation/Code">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Yes"/>
+                            <PropertyValue Property="Value" String="Y"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="No"/>
+                            <PropertyValue Property="Value" String="N"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
